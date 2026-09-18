@@ -11,5 +11,13 @@ pipeline {
                 bat 'mvn clean test'
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    bat 'mvn sonar:sonar -Dsonar.projectKey=LNT-CI-Java-App'
+                }
+            }
+        }
     }
 }
